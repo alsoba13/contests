@@ -1,2 +1,2 @@
 # Contests
-This repo just have my solutions for some competitive programming contests
+Just a repo with my solutions for some competitive programming contests I take part in
