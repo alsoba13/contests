@@ -41,10 +41,11 @@ long long f() {
 	long long n, k;
 	cin >> n >> k;
 	if (k>=30) return 0;
+	if (n == 0) return 0;
 	set<long long> factors = fact(n);
 	long long ans = 0;
 	for(set<long long>::iterator j = factors.begin(); j!=factors.end(); j++){
-		if((*j & (1<<(k-1)))>1) ans++;
+		if((*j & (1<<(k-1)))>0) ans++;
 	}
 	return ans;
 }
