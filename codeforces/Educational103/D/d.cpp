@@ -2,7 +2,7 @@
 using namespace std;
 
 /*
-I didn't manage to solve this during the contest. But I proposed 3 solutions.
+I didn't manage to solve this during the contest. But I proposed 3 solutions later.
 	- First solution is my reimplementation of the winner of the round: https://codeforces.com/contest/1476/submission/105872560
 	- Second is a "greedy" dfs.
 	- Third is a dsu with bipartite graph
