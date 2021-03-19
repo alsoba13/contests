@@ -17,7 +17,7 @@ case $1 in
     ;;
 esac
 
-g++ $folder/$file.cpp -o $folder/$file
+g++ -Wl,-stack_size -Wl,256000000 $folder/$file.cpp -o $folder/$file
 if [[ $? != 0 ]]; then
     exit -1
 fi
