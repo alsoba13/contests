@@ -1,0 +1,2 @@
+s = [sum([2**(9-j) for j in range(0, 10) if seat[j] in ['B', 'R']]) for i in range(0, int(input())) for seat in [input()]]
+print("Problem1: {}\nProblem2: {}".format(max(s), max(s)*(max(s)+1)//2 - min(s)*(min(s)-1)//2 - sum(s)))
