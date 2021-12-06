@@ -1,4 +1,4 @@
-fun slv(numbers: List<Int>, windowSize: Int) = numbers.windowed(windowSize, 1, transform = Collection<Int>::sum).zipWithNext { a, b -> b - a }.count { it > 0 }
+fun slv(numbers: List<Int>, windowSize: Int) = numbers.windowed(windowSize+1).count { it.first() < it.last() }
 
 fun main() {
     val numbers = (0 until readLine()!!.toInt()).map { readLine()!!.toInt() }
