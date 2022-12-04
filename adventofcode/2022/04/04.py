@@ -1,10 +1,11 @@
 def slv(pairs, min_overlaps):
-    return sum([1 if max(int(p1[0] in range(p2[0], p2[1]+1)) + int(p1[1] in range(p2[0], p2[1]+1)), int(p2[0] in range(p1[0], p1[1]+1)) + int(p2[1] in range(p1[0], p1[1]+1))) >= min_overlaps else 0 for  p1, p2 in pairs])
+    num_overlaps = map(lambda p: max((p[0] in range(p[2], p[3]+1)) + (p[1] in range(p[2], p[3]+1)), (p[2] in range(p[0], p[1]+1)) + (p[3] in range(p[0], p[1]+1))), pairs)
+    return sum([overlaps >= min_overlaps for overlaps in num_overlaps])
     
 pairs = []
 while True:
-    try: pairs.append([[int(i) for i in p.split('-')] for p in input().rstrip().split(',')])
+    try: pairs.append([int(i) for pair in input().rstrip().split(',') for i in pair.split('-')])
     except EOFError: break
 
 print("Problem1: {}".format(slv(pairs, 2)))
-print("Problem1: {}".format(slv(pairs, 1)))
+print("Problem2: {}".format(slv(pairs, 1)))
