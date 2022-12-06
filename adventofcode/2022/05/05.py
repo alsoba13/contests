@@ -11,7 +11,7 @@ lines = []
 while True:
     try:
         line = input().strip().split(' from ')
-        s, (f, t) = int(line[0].split('move ')[1]), [int(i)-1 for i in line[1].split(' to ')]
+        s, (f, t) = int(line[0].strip('move ')), [int(i)-1 for i in line[1].split(' to ')]
         lines.append([s, f, t])
     except EOFError: break
 print("Problem1: {}".format(slv(stacks.copy(), lines, True)))
