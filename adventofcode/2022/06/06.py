@@ -5,4 +5,4 @@ def slv(line, n):
 
 line = input().rstrip()
 print("Problem1: {}".format(slv(line, 4)))
-print("Problem1: {}".format(slv(line, 14)))
+print("Problem2: {}".format(slv(line, 14)))
