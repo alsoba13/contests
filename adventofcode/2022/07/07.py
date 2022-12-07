@@ -1,8 +1,8 @@
 def slv(graph, init_function, f):
-    sol_so_far = init_function(graph[1])
+    ans = init_function(graph[1])
     for subdirectory in graph[0]:
-        sol_so_far = f([sol_so_far, slv(graph[0][subdirectory], init_function, f)])
-    return sol_so_far
+        ans = f([ans, slv(graph[0][subdirectory], init_function, f)])
+    return ans
 
 def read_graph(lines, i, graph):
     while i < len(lines):
