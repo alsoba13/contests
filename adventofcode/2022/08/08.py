@@ -23,7 +23,7 @@ def slv2(grid, N):
                 cnt, i, j = 0, x, y
                 while True:
                     i, j = i+dx, j+dy
-                    if i<0 or j<0 or i>=N or j>=N: break
+                    if i not in range(0, N) or j not in range(0, N): break
                     cnt += 1
                     if grid[i][j] >= grid[x][y]: break
                 scenic_score *= cnt
