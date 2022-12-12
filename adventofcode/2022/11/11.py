@@ -1,4 +1,4 @@
-# Self timed: 00:19:29 | 00:24:56
+# Self timed: * 00:19:29 | ** 00:24:56
 from functools import reduce
 from copy import deepcopy
 def slv(monkeys, mod, rounds, relief):
