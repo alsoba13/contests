@@ -3,27 +3,19 @@
 def release_mote(cave, ground_y):
     mote = [0, 500]
     while True:
-        mote_can_move = False
+        mote_moved = False
         for dx in [0, -1, 1]:
-            if mote[0]+1 < ground_y and (mote[0]+1, mote[1]+dx) not in cave:
-                mote_can_move = True
+            if mote[0]+1 <= ground_y and (mote[0]+1, mote[1]+dx) not in cave:
+                mote_moved = True
                 mote = [mote[0]+1, mote[1]+dx]
                 break
-        if mote_can_move is False:
+        if mote_moved is False:
             cave.add((mote[0],mote[1]))
-            return (mote[0], mote[1])
+            return mote[0]
 
-def slv1(cave, ground_y):
+def slv(cave, ground_y, stop_at_y):
     ans = 0
-    while True:
-        mote = release_mote(cave, ground_y)
-        if mote[0] == ground_y-1: return ans
-        ans += 1
-
-def slv2(cave, ground_y):
-    ans = 0
-    while (0,500) not in cave:
-        release_mote(cave, ground_y)
+    while release_mote(cave, ground_y) != stop_at_y:
         ans += 1
     return ans
 
@@ -38,6 +30,7 @@ while True:
                 for x in range(min(xs), max(xs)+1):
                     cave.add((x,y))
     except EOFError: break
-ground_y = 2 + max([rock[0] for rock in cave])
-print("Problem2: {}".format(slv1(cave.copy(), ground_y)))
-print("Problem2: {}".format(slv2(cave.copy(), ground_y)))
+ground_y = 1 + max([rock[0] for rock in cave])
+
+print("Problem1: {}".format(slv(cave.copy(), ground_y, ground_y)-1))
+print("Problem2: {}".format(slv(cave.copy(), ground_y, 0)))
