@@ -28,12 +28,12 @@ def slv2(intervals):
     for y, line in enumerate(intervals):
         if len(line)>1: return line[0][1]*4000000 + y
 
-lines = []
+points = []
 while True:
-    try: lines.append([(int(part.split(', y=')[0].split('x=')[1]), int(part.split(', y=')[1])) for part in input().rstrip().split(":")])
+    try: points.append([(int(part.split(', y=')[0].split('x=')[1]), int(part.split(', y=')[1])) for part in input().rstrip().split(":")])
     except EOFError: break
-lines_sorted_by_distance = sorted(lines, key=cmp_to_key(lambda a, b: abs(b[0][0]-b[1][0])+abs(b[0][1]-b[1][1])-abs(a[0][0]-a[1][0])-abs(a[0][1]-a[1][1])))
-occupied_intervals=get_occupied_intervals(lines_sorted_by_distance)
+points_sorted_by_distance = sorted(points, key=cmp_to_key(lambda a, b: abs(b[0][0]-b[1][0])+abs(b[0][1]-b[1][1])-abs(a[0][0]-a[1][0])-abs(a[0][1]-a[1][1])))
+occupied_intervals=get_occupied_intervals(points_sorted_by_distance)
 
-print("Problem2: {}".format(slv1(occupied_intervals)))
+print("Problem2: {}".format(slv1(occupied_intervals, points)))
 print("Problem2: {}".format(slv2(occupied_intervals)))
