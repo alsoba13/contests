@@ -35,5 +35,5 @@ while True:
 points_sorted_by_distance = sorted(points, key=cmp_to_key(lambda a, b: abs(b[0][0]-b[1][0])+abs(b[0][1]-b[1][1])-abs(a[0][0]-a[1][0])-abs(a[0][1]-a[1][1])))
 occupied_intervals=get_occupied_intervals(points_sorted_by_distance)
 
-print("Problem2: {}".format(slv1(occupied_intervals, points)))
+print("Problem1: {}".format(slv1(occupied_intervals, points)))
 print("Problem2: {}".format(slv2(occupied_intervals)))
