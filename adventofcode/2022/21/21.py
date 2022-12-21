@@ -5,7 +5,6 @@ def eval_if_known(tree, node, unknown = ''):
     if type(tree[node]) == list:
         son1 = eval_if_known(tree, tree[node][0], unknown)
         son2 = eval_if_known(tree, tree[node][2], unknown)
-        if son2 == False and tree[node][1] in '/': print(node)
         if son1 == False or son2 == False: return False
         tree[node] = int(eval("{}{}{}".format(son1, tree[node][1], son2)))
     return tree[node]
