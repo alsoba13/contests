@@ -29,9 +29,7 @@ def slv(elves, rounds):
 
 lines = []
 while True:
-    try: 
-        line = input().rstrip()
-        lines.append(line)
+    try:  lines.append(input().rstrip())
     except EOFError: break
 elves = set((row_index, column_index) for row_index, row in enumerate(lines) for column_index, cell in enumerate(row) if cell == '#')
 print("Problem1: {}".format(slv(elves, 10)))
