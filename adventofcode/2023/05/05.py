@@ -3,7 +3,7 @@ def intersect(x, y):
     if intersection:
         leftovers = (range(min(x[0], y[0]), intersection[0]), range(intersection[-1]+1, max(x[-1], y[-1])+1))
         return intersection, leftovers
-    return intersection, (x, y)
+    return None, (x, y)
 
 def slv(seeds, category_mappings):
     current_category_ranges = [range(seeds[i], seeds[i]+seeds[i+1]) for i in range(0,len(seeds),2)]
