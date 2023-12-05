@@ -3,29 +3,23 @@ def intersect(x, y):
     if intersection:
         leftovers = (range(min(x[0], y[0]), intersection[0]), range(intersection[-1]+1, max(x[-1], y[-1])+1))
         return intersection, leftovers
-    return intersection, None
+    return intersection, (x, y)
 
 def slv(seeds, maps):
     seed_ranges = [range(seeds[i], seeds[i]+seeds[i+1]) for i in range(0,len(seeds),2)]
     for map in maps:
-        new_ranges = []
-        for seed_range in seed_ranges:
-            q = [seed_range]
-            while len(q):
-                seed_range = q.pop(0)
-                changed = False
-                for map_range, offset in map:
-                    intersection, leftovers = intersect(seed_range, map_range)
-                    if not intersection: continue
-                    changed = True
-                    new_ranges.append(range(intersection[0]+offset, intersection[-1]+offset+1))
-                    for leftover_range in leftovers:
-                        if leftover_range and leftover_range[0] in seed_range and leftover_range[-1] in seed_range:
-                            q.append(leftover_range)
-                    break
-                if not changed: 
-                    new_ranges.append(seed_range)
-        seed_ranges = new_ranges
+        next_seed_ranges = []
+        for map_range, offset in map:
+            leftover_seedsss = []
+            for seed_range in seed_ranges:
+                intersection, leftovers = intersect(seed_range, map_range)
+                if intersection: next_seed_ranges.append(range(intersection[0]+offset, intersection[-1]+offset+1))
+                for leftover_range in leftovers:
+                    if leftover_range and leftover_range[0] in seed_range and leftover_range[-1] in seed_range:
+                        leftover_seedsss.append(leftover_range)
+            seed_ranges = leftover_seedsss
+        next_seed_ranges.extend(seed_ranges)
+        seed_ranges = next_seed_ranges
     return sorted([x[0] for x in seed_ranges])[0]
 
 seeds = [int(x) for x in input().split(": ")[1].split(" ")]
