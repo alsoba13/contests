@@ -5,37 +5,37 @@ def intersect(x, y):
         return intersection, leftovers
     return intersection, (x, y)
 
-def slv(seeds, maps):
-    seed_ranges = [range(seeds[i], seeds[i]+seeds[i+1]) for i in range(0,len(seeds),2)]
-    for map in maps:
-        next_seed_ranges = []
-        for map_range, offset in map:
-            leftover_seedsss = []
-            for seed_range in seed_ranges:
-                intersection, leftovers = intersect(seed_range, map_range)
-                if intersection: next_seed_ranges.append(range(intersection[0]+offset, intersection[-1]+offset+1))
+def slv(seeds, category_mappings):
+    current_category_ranges = [range(seeds[i], seeds[i]+seeds[i+1]) for i in range(0,len(seeds),2)]
+    for category_mapping in category_mappings:
+        next_category_ranges = []
+        for offset_range, offset in category_mapping:
+            non_matched_ranges = []
+            for current_category_range in current_category_ranges:
+                intersection, leftovers = intersect(current_category_range, offset_range)
+                if intersection: next_category_ranges.append(range(intersection[0]+offset, intersection[-1]+offset+1))
                 for leftover_range in leftovers:
-                    if leftover_range and leftover_range[0] in seed_range and leftover_range[-1] in seed_range:
-                        leftover_seedsss.append(leftover_range)
-            seed_ranges = leftover_seedsss
-        next_seed_ranges.extend(seed_ranges)
-        seed_ranges = next_seed_ranges
-    return sorted([x[0] for x in seed_ranges])[0]
+                    if leftover_range and leftover_range[0] in current_category_range and leftover_range[-1] in current_category_range:
+                        non_matched_ranges.append(leftover_range)
+            current_category_ranges = non_matched_ranges
+        next_category_ranges.extend(current_category_ranges)
+        current_category_ranges = next_category_ranges
+    return sorted([x[0] for x in current_category_ranges])[0]
 
 seeds = [int(x) for x in input().split(": ")[1].split(" ")]
-maps = []
+category_mappings = []
 input()
 while True:
     try:
         source, destination = input().split(' ')[0].split('-to-')
-        lists = []
+        category_mapping = []
         while True:
             line = input().rstrip()
             if line == '': break
-            values = [int(x) for x in line.split(' ')]
-            lists.append((range(values[1], values[1]+values[2]), values[0]-values[1]))
-        maps.append(lists)
+            destination_start, source_start, length = [int(x) for x in line.split(' ')]
+            category_mapping.append((range(source_start, source_start+length), destination_start-source_start))
+        category_mappings.append(category_mapping)
     except EOFError: break
 
-print("Problem1: {}".format(slv([rep_seed for seed in seeds for rep_seed in [seed, 1]], maps)))
-print("Problem2: {}".format(slv(seeds, maps)))
+print("Problem1: {}".format(slv([rep_seed for seed in seeds for rep_seed in [seed, 1]], category_mappings)))
+print("Problem2: {}".format(slv(seeds, category_mappings)))
