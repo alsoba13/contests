@@ -1,9 +1,8 @@
 def intersect(x, y):
-    intersection = range(max(x[0], y[0]), min(x[-1], y[-1])+1)
-    if intersection:
-        leftovers = (range(min(x[0], y[0]), intersection[0]), range(intersection[-1]+1, max(x[-1], y[-1])+1))
-        return intersection, leftovers
-    return None, (x, y)
+    intersection = [max(x[0], y[0]), min(x[-1], y[-1])+1]
+    left = [min(x[0], y[0]), min(intersection)]
+    right = [max(intersection), max(x[-1], y[-1])+1]
+    return range(*intersection), (range(*left), range(*right))
 
 def slv(seeds, category_mappings):
     current_category_ranges = [range(seeds[i], seeds[i]+seeds[i+1]) for i in range(0,len(seeds),2)]
@@ -15,19 +14,19 @@ def slv(seeds, category_mappings):
                 intersection, leftovers = intersect(current_category_range, offset_range)
                 if intersection: next_category_ranges.append(range(intersection[0]+offset, intersection[-1]+offset+1))
                 for leftover_range in leftovers:
-                    if leftover_range and leftover_range[0] in current_category_range and leftover_range[-1] in current_category_range:
+                    if leftover_range and intersect(leftover_range, current_category_range)[0] == leftover_range:
                         non_matched_ranges.append(leftover_range)
             current_category_ranges = non_matched_ranges
         next_category_ranges.extend(current_category_ranges)
         current_category_ranges = next_category_ranges
-    return sorted([x[0] for x in current_category_ranges])[0]
+    return min([x[0] for x in current_category_ranges])
 
 seeds = [int(x) for x in input().split(": ")[1].split(" ")]
 category_mappings = []
 input()
 while True:
     try:
-        source, destination = input().split(' ')[0].split('-to-')
+        input()
         category_mapping = []
         while True:
             line = input().rstrip()
