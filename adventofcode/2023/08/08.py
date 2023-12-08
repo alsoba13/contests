@@ -1,4 +1,4 @@
-from math import gcd
+from math import lcm
 from functools import reduce
 
 def find(network, ins, node, is_ending):
@@ -8,12 +8,9 @@ def find(network, ins, node, is_ending):
         sol += 1
     return sol
 
-def lcm(nums):
-    return reduce(lambda a,b: a * b // gcd(a,b), nums)
-
 def slv(network, ins, is_starter, is_ending):
     starters = [node for node in network if is_starter(node)]
-    return lcm(find(network, ins, node, is_ending) for node in starters)
+    return lcm(*[find(network, ins, node, is_ending) for node in starters])
 
 ins, _, network_lines = input().rstrip().replace('L','0').replace('R','1'), input(), []
 while True:
