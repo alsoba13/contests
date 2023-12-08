@@ -1,5 +1,4 @@
 from math import lcm
-from functools import reduce
 
 def find(network, ins, node, is_ending):
     sol = 0
