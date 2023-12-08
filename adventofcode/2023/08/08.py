@@ -22,4 +22,4 @@ while True:
 network = {node: ways[1:-1].split(', ') for node, ways in network_lines}
 
 print("Problem1: {}".format(slv(network, ins, lambda a: a == 'AAA', lambda a: a == 'ZZZ')))
-print("Problem2: {}".format(slv(network, ins, lambda a: a[2] == 'A', lambda a: a[2] == 'Z')))
+print("Problem2: {}".format(slv(network, ins, lambda a: a[-1] == 'A', lambda a: a[-1] == 'Z')))
