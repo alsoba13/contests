@@ -61,24 +61,21 @@ def zoom_grid(grid):
             for xx in range(3):
                 for yy in range(3):
                     new_grid[3*x+xx][3*y+yy] = zooms[grid[x][y]][xx][yy]
-    return new_grid
+    return new_grid, 3*N, 3*M
 
 def slv1(grid):
     total_free_cells = sum([line.count('.') for line in grid])
     return (len(grid)*len(grid[0])-total_free_cells)//2
     
 def slv2(grid):
-    grid = zoom_grid(grid)
-    N, M = len(grid), len(grid[0])
+    grid, N, M = zoom_grid(grid)
     nodes = [[0,0]]
-    seen = [[False for x in range(M)] for y in range(N)]
-    seen[0][0] = True
+    grid[0][0] = '#'
     while len(nodes):
         (x, y) = nodes.pop(0)
-        grid[x][y] = '#'
         for dx, dy in {(-1,0), (1,0), (0,-1), (0,1)}:
-            if not seen[x+dx][y+dy] and grid[x+dx][y+dy] == '.':
-                seen[x+dx][y+dy] = True
+            if grid[x+dx][y+dy] == '.':
+                grid[x+dx][y+dy] = '#'
                 nodes.append([x+dx, y+dy])
     return sum(1 for x in range(N//3) for y in range(M//3) if grid[3*x+1][3*y+1] == '.')
 
