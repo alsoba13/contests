@@ -1,13 +1,9 @@
-def gaps(grid):
-    return [x for x in range(len(grid)) if grid[x].count('#') == 0]
+def gaps(galaxies):
+    return [x for x in range(min(galaxies)+1, max(galaxies)-1) if x not in galaxies]
 
-def translate(grid):
-    return [[grid[y][x] for y in range(len(grid[0]))] for x in range(len(grid))]
-
-def slv(grid, gap_size):
-    galaxies = [(x, y) for x in range(len(grid)) for y in range(len(grid[0])) if grid[x][y] == '#']
-    gaps_x = gaps(grid)
-    gaps_y = gaps(translate(grid))
+def slv(galaxies, gap_size):
+    gaps_x = gaps({galaxy[0] for galaxy in galaxies})
+    gaps_y = gaps({galaxy[1] for galaxy in galaxies})
 
     sol = 0
     for i, (x1, y1) in enumerate(galaxies):
@@ -21,6 +17,7 @@ grid = []
 while True:
     try: grid.append(input().rstrip())
     except EOFError: break
+galaxies = [(x, y) for x in range(len(grid)) for y in range(len(grid[0])) if grid[x][y] == '#']
 
-print("Problem1: {}".format(slv(grid, 2)))
-print("Problem2: {}".format(slv(grid, 1000000)))
+print("Problem1: {}".format(slv(galaxies, 2)))
+print("Problem2: {}".format(slv(galaxies, 1000000)))
