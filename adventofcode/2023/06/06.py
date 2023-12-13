@@ -12,4 +12,4 @@ times = [int(x) for x in input().split(":")[1].split(" ") if x != '']
 distances = [int(x) for x in input().split(":")[1].split(" ") if x != '']
 
 print("Problem1: {}".format(slv(times, distances)))
-print("Problem1: {}".format(slv([int(''.join([str(t) for t in times]))], [int(''.join([str(d) for d in distances]))])))
+print("Problem2: {}".format(slv([int(''.join([str(t) for t in times]))], [int(''.join([str(d) for d in distances]))])))
