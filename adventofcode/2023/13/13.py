@@ -18,7 +18,7 @@ def find_mirror(pattern, expected_number_of_differences):
 def slv(patterns, expected_number_of_differences):
     return sum(100*find_mirror(pattern, expected_number_of_differences) + find_mirror(transpose(pattern), expected_number_of_differences) for pattern in patterns)
 
-patterns = [[line for line in pattern.splitlines()] for pattern in sys.stdin.read().split("\n\n")]
+patterns = [[line for line in pattern.split('\n')] for pattern in sys.stdin.read().split("\n\n")]
 
 print("Problem1: {}".format(slv(patterns, 0)))
 print("Problem2: {}".format(slv(patterns, 1)))
